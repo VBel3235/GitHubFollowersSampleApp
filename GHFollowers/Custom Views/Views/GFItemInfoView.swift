@@ -8,10 +8,8 @@
 import UIKit
 
 enum itemInfoType{
-    case repos
-    case gists
-    case following
-    case followers
+    case repos, gists, following, followers
+ 
 }
 
 class GFItemInfoView: UIView {
@@ -59,29 +57,23 @@ class GFItemInfoView: UIView {
     func set(itemInfoType: itemInfoType, with count: Int){
         switch itemInfoType {
         case .repos:
-            symbolImageView.image = UIImage(named: SFSymbols.repos)
-            titleLabel.text = "Public repos"
+            symbolImageView.image   = UIImage(systemName: SFSymbols.repos)
+            titleLabel.text         = "Public Repos"
            
         case.gists:
-            symbolImageView.image = UIImage(named: SFSymbols.gists)
-            titleLabel.text = "Public gists"
+            symbolImageView.image   = UIImage(systemName: SFSymbols.gists)
+            titleLabel.text         = "Public Gists"
        
         case .followers:
-            symbolImageView.image = UIImage(named: SFSymbols.followers)
-            titleLabel.text = "Followers"
+            symbolImageView.image   = UIImage(systemName: SFSymbols.followers)
+            titleLabel.text         = "Followers"
             
         case .following:
-            symbolImageView.image = UIImage(named: SFSymbols.following)
-            titleLabel.text = "Following"
+            symbolImageView.image   = UIImage(systemName: SFSymbols.following)
+            titleLabel.text         = "Following"
         }
-        countLabel.text = String(count)
+        countLabel.text             = String(count)
     }
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+    
 
 }
