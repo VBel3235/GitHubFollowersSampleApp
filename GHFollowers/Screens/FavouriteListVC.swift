@@ -15,7 +15,7 @@ class FavouriteListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
-        
+        configureTableView()
         
         // Do any additional setup after loading the view.
     }
@@ -41,7 +41,7 @@ class FavouriteListVC: UIViewController {
                 }
                 
             case .failure(let error):
-                self.presentGFAlertOnMainThread(title: "SOmething went wrong", message: error.rawValue, buttonTitle: "OK")
+                self.presentGFAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTitle: "OK")
             }
         }
     }
@@ -74,6 +74,30 @@ extension FavouriteListVC: UITableViewDelegate, UITableViewDataSource{
         let favourite = favourites[indexPath.row]
         cell.set(favourite: favourite)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let favourite = favourites[indexPath.row]
+        let destVC = FollowerListVC()
+        destVC.userName = favourite.login
+        destVC.title    = favourite.login
+        
+        navigationController?.pushViewController(destVC, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else {
+            return
+        }
+        let favourite = favourites[indexPath.row]
+        favourites.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .left)
+        
+        PersistanceManager.update(favourite: favourite, actionType: .remove) { [weak self] error in
+            guard let self = self else { return }
+            guard let error = error else { return }
+            self.presentGFAlertOnMainThread(title: "Unable to remove", message: error.rawValue, buttonTitle: "OK")
+        }
     }
     
     
