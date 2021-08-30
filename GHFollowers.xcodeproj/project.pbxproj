@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F529F1BA26DC5E8D007B91B4 /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F529F1B926DC5E8D007B91B4 /* PersistanceManager.swift */; };
+		F529F1BC26DC6EC3007B91B4 /* FavouriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F529F1BB26DC6EC2007B91B4 /* FavouriteCell.swift */; };
 		F52AD202269C54AF001FF23E /* UIViewController+EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52AD201269C54AF001FF23E /* UIViewController+EXT.swift */; };
 		F52AD208269CF1D6001FF23E /* GFContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52AD207269CF1D6001FF23E /* GFContainerView.swift */; };
 		F52AD20B269CF50D001FF23E /* Follower.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52AD20A269CF50D001FF23E /* Follower.swift */; };
@@ -42,6 +44,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F529F1B926DC5E8D007B91B4 /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
+		F529F1BB26DC6EC2007B91B4 /* FavouriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCell.swift; sourceTree = "<group>"; };
 		F52AD201269C54AF001FF23E /* UIViewController+EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+EXT.swift"; sourceTree = "<group>"; };
 		F52AD207269CF1D6001FF23E /* GFContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFContainerView.swift; sourceTree = "<group>"; };
 		F52AD20A269CF50D001FF23E /* Follower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Follower.swift; sourceTree = "<group>"; };
@@ -148,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				F52AD20F269CFBF9001FF23E /* NetworkManager.swift */,
+				F529F1B926DC5E8D007B91B4 /* PersistanceManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -176,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				F58DE4F0269E4C8F006C101A /* FollowerCell.swift */,
+				F529F1BB26DC6EC2007B91B4 /* FavouriteCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -337,6 +343,7 @@
 				F5A5757D2697A0B5003D0056 /* SearchVC.swift in Sources */,
 				F5A5758126986333003D0056 /* GFButton.swift in Sources */,
 				F5A5757F2697A0E6003D0056 /* FavouriteListVC.swift in Sources */,
+				F529F1BC26DC6EC3007B91B4 /* FavouriteCell.swift in Sources */,
 				F57BE61226D51C1200DE7594 /* Date+EXT.swift in Sources */,
 				F5BC916E26AF4771008E9841 /* GFUserInfoHeaderVC.swift in Sources */,
 				F5A5756926979A18003D0056 /* AppDelegate.swift in Sources */,
@@ -352,6 +359,7 @@
 				F58DE4F3269E4E5B006C101A /* GFAvatarImageView.swift in Sources */,
 				F5A5756B26979A18003D0056 /* SceneDelegate.swift in Sources */,
 				F5A293EC26AA62960045089D /* UserInfoVC.swift in Sources */,
+				F529F1BA26DC5E8D007B91B4 /* PersistanceManager.swift in Sources */,
 				F52AD20B269CF50D001FF23E /* Follower.swift in Sources */,
 				F5D3F790269AE08E0042E8BE /* GFTitleLabel.swift in Sources */,
 				F5A5758526998FF7003D0056 /* FollowerListVC.swift in Sources */,
