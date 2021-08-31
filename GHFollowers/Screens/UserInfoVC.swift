@@ -9,11 +9,10 @@
 
 import UIKit
 
-
-protocol UserInfoVCDelegate: class{
-    func didTapGitHubProfile(for user: User)
-    func didTapGetFollowers(for user: User)
+protocol UserInfoVCDelegate: class {
+    func didRequestFollowers(for username: String)
 }
+
 
 class UserInfoVC: GFDataLoadingVC {
     
@@ -23,7 +22,7 @@ class UserInfoVC: GFDataLoadingVC {
     let datelabel               = GFBodyLabel(textAlignment: .center)
     var itemViews: [UIView]     = []
     
-    weak var delegate: FollowerListVCDelegate?
+    weak var delegate: UserInfoVCDelegate?
     var userName: String!
 
     override func viewDidLoad() {
@@ -53,15 +52,14 @@ class UserInfoVC: GFDataLoadingVC {
     }
     
     func configureUIElements(with user: User){
-        let repoItemVC          = GFRepoItemVC(user: user)
-        repoItemVC.delegate     = self
         
-        let followerItemVC      = GFFollowerItemVC(user: user)
-        followerItemVC.delegate = self
+      
+        
+      
         
         self.add(childVC: GFUserInfoHeaderVC(user: user), to: self.headerView)
-        self.add(childVC: repoItemVC, to: self.itemViewOne)
-        self.add(childVC: followerItemVC, to: self.itemViewTwo)
+        self.add(childVC: GFRepoItemVC(user: user, delegate: self), to: self.itemViewOne)
+        self.add(childVC: GFFollowerItemVC(follower: user, delegate: self), to: self.itemViewTwo)
         self.datelabel.text = "GitHub since \(user.createdAt.convertToMonthYearFormat())"
     }
     
@@ -92,7 +90,7 @@ class UserInfoVC: GFDataLoadingVC {
         NSLayoutConstraint.activate([
       
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 180),
+            headerView.heightAnchor.constraint(equalToConstant: 210),
             
             itemViewOne.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: padding),
             itemViewOne.heightAnchor.constraint(equalToConstant: itemHeight),
@@ -101,7 +99,7 @@ class UserInfoVC: GFDataLoadingVC {
             itemViewTwo.heightAnchor.constraint(equalToConstant: itemHeight),
             
             datelabel.topAnchor.constraint(equalTo: itemViewTwo.bottomAnchor, constant: padding),
-            datelabel.heightAnchor.constraint(equalToConstant: 18)
+            datelabel.heightAnchor.constraint(equalToConstant: 50)
             
         ])
     }
@@ -120,15 +118,7 @@ class UserInfoVC: GFDataLoadingVC {
 
 }
 
-extension UserInfoVC: UserInfoVCDelegate{
-    func didTapGitHubProfile(for user: User) {
-        guard let url = URL(string: user.htmlUrl) else {
-            presentGFAlertOnMainThread(title: "Invalid URL", message: "URL attached to that user is invalid", buttonTitle: "OK")
-            return
-        }
-       presentSafariVC(with: url)
-    }
-    
+extension UserInfoVC: GFFollowerItemVCDelegate{
     func didTapGetFollowers(for user: User) {
         guard user.followers != 0 else { presentGFAlertOnMainThread(title: "No followers", message: "This user has no followers", buttonTitle: "So sad :(")
             return
@@ -137,10 +127,48 @@ extension UserInfoVC: UserInfoVCDelegate{
         dismissVC()
     }
     
+ 
     
-   
+    
+}
+
+extension UserInfoVC: GFRepoItemVCDelegate{
+    func didTapGitHubProfile(for user: User) {
+        guard let url = URL(string: user.htmlUrl) else {
+            presentGFAlertOnMainThread(title: "Invalid URL", message: "URL attached to that user is invalid", buttonTitle: "OK")
+            return
+        }
+        presentSafariVC(with: url)
+    }
+    
+  
     
    
     
     
 }
+
+//extension UserInfoVC: ItemInfoVCDelegate{
+//    func didTapGitHubProfile(for user: User) {
+//        guard let url = URL(string: user.htmlUrl) else {
+//            presentGFAlertOnMainThread(title: "Invalid URL", message: "URL attached to that user is invalid", buttonTitle: "OK")
+//            return
+//        }
+//       presentSafariVC(with: url)
+//    }
+//    
+//    func didTapGetFollowers(for user: User) {
+//        guard user.followers != 0 else { presentGFAlertOnMainThread(title: "No followers", message: "This user has no followers", buttonTitle: "So sad :(")
+//            return
+//        }
+//        delegate?.didRequestFollowers(for: user.login)
+//        dismissVC()
+//    }
+//    
+//    
+//   
+//    
+//   
+//    
+//    
+//}
