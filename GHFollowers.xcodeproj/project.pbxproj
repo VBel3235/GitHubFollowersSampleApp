@@ -15,6 +15,7 @@
 		F52AD20D269CF5E2001FF23E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52AD20C269CF5E2001FF23E /* User.swift */; };
 		F52AD210269CFBF9001FF23E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52AD20F269CFBF9001FF23E /* NetworkManager.swift */; };
 		F5755AE826DD775B00BAEDA9 /* GFTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5755AE726DD775B00BAEDA9 /* GFTabBarController.swift */; };
+		F5755AEA26DDA41F00BAEDA9 /* GFDataLoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5755AE926DDA41F00BAEDA9 /* GFDataLoadingVC.swift */; };
 		F57BE60D26D510D600DE7594 /* GFRepoItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57BE60C26D510D600DE7594 /* GFRepoItemVC.swift */; };
 		F57BE60F26D5138B00DE7594 /* GFFollowerItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57BE60E26D5138B00DE7594 /* GFFollowerItemVC.swift */; };
 		F57BE61226D51C1200DE7594 /* Date+EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57BE61126D51C1200DE7594 /* Date+EXT.swift */; };
@@ -53,6 +54,7 @@
 		F52AD20C269CF5E2001FF23E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F52AD20F269CFBF9001FF23E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		F5755AE726DD775B00BAEDA9 /* GFTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFTabBarController.swift; sourceTree = "<group>"; };
+		F5755AE926DDA41F00BAEDA9 /* GFDataLoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFDataLoadingVC.swift; sourceTree = "<group>"; };
 		F57BE60C26D510D600DE7594 /* GFRepoItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFRepoItemVC.swift; sourceTree = "<group>"; };
 		F57BE60E26D5138B00DE7594 /* GFFollowerItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFFollowerItemVC.swift; sourceTree = "<group>"; };
 		F57BE61126D51C1200DE7594 /* Date+EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+EXT.swift"; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				F57BE61026D513DB00DE7594 /* ItemInfoVCs */,
 				F5D3F793269B10BF0042E8BE /* GFAlertVC.swift */,
 				F5BC916D26AF4771008E9841 /* GFUserInfoHeaderVC.swift */,
+				F5755AE926DDA41F00BAEDA9 /* GFDataLoadingVC.swift */,
 			);
 			path = viewControllers;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				F529F1BC26DC6EC3007B91B4 /* FavouriteCell.swift in Sources */,
 				F57BE61226D51C1200DE7594 /* Date+EXT.swift in Sources */,
 				F5BC916E26AF4771008E9841 /* GFUserInfoHeaderVC.swift in Sources */,
+				F5755AEA26DDA41F00BAEDA9 /* GFDataLoadingVC.swift in Sources */,
 				F5A5756926979A18003D0056 /* AppDelegate.swift in Sources */,
 				F5D3F794269B10BF0042E8BE /* GFAlertVC.swift in Sources */,
 				F58DE50826A6F78C006C101A /* GFEmptyStateView.swift in Sources */,
