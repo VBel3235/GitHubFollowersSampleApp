@@ -18,20 +18,20 @@ class FollowerListVC: GFDataLoadingVC {
     
     var collectionView: UICollectionView!
     var userName: String!
-    var page = 1
-    var hasMoreFollowers = true
+    var page                                    = 1
+    var hasMoreFollowers                        = true
     
-    var filteredFollowers: [Follower] = []
-    var followers: [Follower] = []
-    var isSearching = false
-    var isLoadingMoreFollower = false
+    var filteredFollowers: [Follower]           = []
+    var followers: [Follower]                   = []
+    var isSearching                             = false
+    var isLoadingMoreFollower                   = false
     
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
     
     init(user: String) {
         super.init(nibName: nil, bundle: nil)
-        self.userName   = user
-        self.title      = user
+        self.userName                           = user
+        self.title                              = user
     }
     
     required init?(coder: NSCoder) {
@@ -45,9 +45,7 @@ class FollowerListVC: GFDataLoadingVC {
         getFollowers(username: userName, page: page)
         configureDataSource()
         configureSearchController()
-     
-
-        // Do any additional setup after loading the view.
+  
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,15 +62,13 @@ class FollowerListVC: GFDataLoadingVC {
     }
     
     func configureViewController(){
-        view.backgroundColor = .systemBackground
+        view.backgroundColor                                   = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = addButton
     }
     
-     
-
     func configureSearchController(){
         let searchController                    = UISearchController()
         searchController.searchResultsUpdater   = self
@@ -82,9 +78,6 @@ class FollowerListVC: GFDataLoadingVC {
         
     }
     
-    
-    
-
     func getFollowers(username: String, page: Int){
         showLoadingView()
         isLoadingMoreFollower = true
@@ -94,23 +87,27 @@ class FollowerListVC: GFDataLoadingVC {
             self.dismissLoadingView()
             switch result {
             case .success(let followers):
-                if followers.count < 100 { self.hasMoreFollowers = false }
-                self.followers.append(contentsOf: followers)
-                
-                if self.followers.isEmpty {
-                    let message = "This user doesnt have any followers. Go follow him 😀"
-                    DispatchQueue.main.async {
-                        self.showEmptyStateView(with: message, in: self.view)
-                    }
-                    return
-                }
-                self.updateData(on: self.followers)
+                self.updateUI(with: followers)
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "Bad stuff happened", message: error.rawValue, buttonTitle: "OK")
             }
             self.isLoadingMoreFollower = false
  
         }
+    }
+    
+    func updateUI(with followers: [Follower]){
+        if followers.count < 100 { self.hasMoreFollowers = false }
+        self.followers.append(contentsOf: followers)
+        
+        if self.followers.isEmpty {
+            let message = "This user doesnt have any followers. Go follow him 😀"
+            DispatchQueue.main.async {
+                self.showEmptyStateView(with: message, in: self.view)
+            }
+            return
+        }
+        self.updateData(on: self.followers)
     }
     
     func configureDataSource(){
@@ -138,19 +135,23 @@ class FollowerListVC: GFDataLoadingVC {
             self.dismissLoadingView()
             switch result{
             case .success(let user):
-                let favourite = Follower(login: user.login, avatarUrl: user.avatarUrl)
-                PersistanceManager.update(favourite: favourite, actionType: .add) { [weak self] error in
-                    guard let self = self else { return }
-                    guard let error = error else {
-                        self.presentGFAlertOnMainThread(title: "Success!", message: "You have successfully favourited this user 🎉", buttonTitle: "Hooray!")
-                        return
-                    }
-                    self.presentGFAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTitle: "OK")
-                }
+                self.addUserToFavourites(user: user)
                 
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTitle: "OK")
             }
+        }
+    }
+
+    func addUserToFavourites(user: User){
+        let favourite = Follower(login: user.login, avatarUrl: user.avatarUrl)
+        PersistanceManager.update(favourite: favourite, actionType: .add) { [weak self] error in
+            guard let self = self else { return }
+            guard let error = error else {
+                self.presentGFAlertOnMainThread(title: "Success!", message: "You have successfully favourited this user 🎉", buttonTitle: "Hooray!")
+                return
+            }
+            self.presentGFAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTitle: "OK")
         }
     }
 }
@@ -173,10 +174,9 @@ extension FollowerListVC: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let activeArray = isSearching ? filteredFollowers : followers
         let follower                = activeArray[indexPath.item]
-        
         let destVC                  = UserInfoVC()
-        destVC.userName = follower.login
-        destVC.delegate = self
+        destVC.userName             = follower.login
+        destVC.delegate             = self
         let navController           = UINavigationController(rootViewController: destVC)
         present(navController, animated: true)
         
@@ -207,7 +207,6 @@ extension FollowerListVC: UserInfoVCDelegate{
         followers.removeAll()
         filteredFollowers.removeAll()
         collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
-        
         getFollowers(username: username, page: page)
         
     }
