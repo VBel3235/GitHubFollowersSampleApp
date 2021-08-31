@@ -18,13 +18,7 @@ class GFButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+  
         convenience init(backgroundColor: UIColor, title: String) {
         self.init(frame: .zero)
         self.backgroundColor = backgroundColor
@@ -34,8 +28,8 @@ class GFButton: UIButton {
     
     private func configure(){
         layer.cornerRadius      = 10
-        setTitleColor(.white, for: .normal)
         titleLabel?.font        = UIFont.preferredFont(forTextStyle: .headline)
+        setTitleColor(.white, for: .normal)
         translatesAutoresizingMaskIntoConstraints = false
     }
     

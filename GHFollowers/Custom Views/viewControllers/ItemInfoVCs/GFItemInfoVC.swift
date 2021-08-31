@@ -11,12 +11,12 @@ class GFItemInfoVC: UIViewController {
     
     var user: User!
     
-    
     let stackView = UIStackView()
     
     let itemInfoViewOne = GFItemInfoView()
     let itemInfoViewTwo = GFItemInfoView()
     let actionButton    = GFButton()
+    
     
     init(user: User) {
         super.init(nibName: nil, bundle: nil)
@@ -43,7 +43,7 @@ class GFItemInfoVC: UIViewController {
     
     func configureBackgroundView(){
         view.layer.cornerRadius = 18
-        view.backgroundColor = .secondarySystemBackground
+        view.backgroundColor    = .secondarySystemBackground
     }
     
     private func configureStackView(){
@@ -58,7 +58,7 @@ class GFItemInfoVC: UIViewController {
         view.addSubViews(stackView, actionButton)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        let padding: CGFloat = 20
+        let padding: CGFloat    = 20
         
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),

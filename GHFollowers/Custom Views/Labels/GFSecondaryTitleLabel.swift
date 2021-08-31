@@ -26,12 +26,12 @@ class GFSecondaryTitleLabel: UILabel {
     }
     
     private func configure(){
-        textColor                        = .secondaryLabel
-        textAlignment                   =  .left
-        adjustsFontSizeToFitWidth       = true
-        minimumScaleFactor               = 0.9
-        lineBreakMode                   = .byTruncatingTail
-        translatesAutoresizingMaskIntoConstraints = false
+        textColor                                     = .secondaryLabel
+        textAlignment                                 =  .left
+        adjustsFontSizeToFitWidth                     = true
+        minimumScaleFactor                            = 0.9
+        lineBreakMode                                 = .byTruncatingTail
+        translatesAutoresizingMaskIntoConstraints     = false
     }
     
 

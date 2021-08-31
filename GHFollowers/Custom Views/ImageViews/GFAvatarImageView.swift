@@ -10,7 +10,6 @@ import UIKit
 class GFAvatarImageView: UIImageView {
     
     let cache               = NetworkManager.shared.cache
-
     let placeholderImage    = Images.Placeholder
     
     override init(frame: CGRect) {
@@ -29,6 +28,14 @@ class GFAvatarImageView: UIImageView {
         translatesAutoresizingMaskIntoConstraints   = false
     }
     
+    func downloadImage(fromURL url: String){
+        NetworkManager.shared.downloadImage(from: url) { [weak self] image in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.image = image
+            }
+        }
+    }
     
     /*
     // Only override draw() if you perform custom drawing.

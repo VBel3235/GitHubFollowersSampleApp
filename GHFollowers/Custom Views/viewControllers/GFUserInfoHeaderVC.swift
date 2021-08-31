@@ -29,14 +29,14 @@ class GFUserInfoHeaderVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addSubviews()
+        view.addSubViews(avatarImageView, usernameLabel, nameLabel, locationLabel, locationImageView, bioLabel   )
         layoutUI()
         configureUIElements()
         // Do any additional setup after loading the view.
     }
     
     func configureUIElements(){
-        downloadAvatarImage()
+        avatarImageView.downloadImage(fromURL: user.avatarUrl)
         usernameLabel.text              = user.login
         nameLabel.text                  = user.name ?? ""
         locationLabel.text              = user.location ?? "No location"
@@ -48,20 +48,6 @@ class GFUserInfoHeaderVC: UIViewController {
         
     }
     
-    func downloadAvatarImage(){
-        
-        NetworkManager.shared.downloadImage(from: user.avatarUrl) { [weak self] image in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.avatarImageView.image = image
-            }
-        }
-    }
-    
-    func addSubviews(){
-        view.addSubViews(avatarImageView, usernameLabel, nameLabel, locationLabel, locationImageView, bioLabel   )
-    
-    }
     
     func layoutUI(){
         let padding: CGFloat = 20
